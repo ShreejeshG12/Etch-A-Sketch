@@ -1,6 +1,12 @@
 // Add DOM elements inside a div container to create a square of as many boxes as the user inputs using prompt
 const container = document.querySelector(".container");
 
+const btn = document.querySelector(".button");
+const createBtn = document.createElement("button");
+btn.appendChild(createBtn);
+createBtn.textContent = "Click to Create";
+
+
 function getGridSize() {
     let gridSize;
     while (true) {
@@ -29,15 +35,19 @@ function createAGrid(N) {
     }
 };
 
-createAGrid(45)
-
-const cells = document.querySelectorAll(".column");
-
-cells.forEach(cell => {
-    cell.addEventListener("mouseover", () => {
-        const r = Math.floor(Math.random() * 256);
-        const g = Math.floor(Math.random() * 256);
-        const b = Math.floor(Math.random() * 256);
-        cell.style.backgroundColor = `rgb(${r},${g},${b})`;
-    })
+createBtn.addEventListener("click", () => {
+    createAGrid(getGridSize());
 });
+
+
+
+container.addEventListener("mouseover", (e) => {
+    if (!e.target.classList.contains("column")) return;
+
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+
+    e.target.style.backgroundColor = `rgb(${r},${g},${b})`; 
+}) 
+
